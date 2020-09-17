@@ -39,6 +39,14 @@ class Header extends Component {
         store.change();
     }
 
+    linkTo=(url)=>{
+        if(url=='home'){
+            window.location.href = "http://localhost:3000/"
+        }else{
+            window.location.href = "http://localhost:3000/blogs"
+        }
+    }
+
     render() {
         let status = store.status;
         return (
@@ -48,8 +56,8 @@ class Header extends Component {
                         <div style={style.label}>
                             <Typography variant="h6" >howay-blog</Typography>
                         </div>
-                            <Button color="inherit">home</Button>
-                            <Button color="inherit">blogs</Button>
+                            <Button onClick={this.linkTo.bind(this,"home")} color="inherit">首页</Button>
+                            <Button onClick={this.linkTo.bind(this,"blogs")} color="inherit">圈子</Button>
 
                     </Grid>
                     <Grid item xs={1}>

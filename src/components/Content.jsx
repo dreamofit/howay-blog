@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
-import { Container,Typography } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { Store } from '../mobx/Store';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import EssayCard from './EssayCard';
 const store = new Store();
+
+const styles = {
+    container: {
+        borderRight: '0.1px solid',
+        borderColor: "rgb(255, 179, 0,0.2)",
+    }
+}
+
 @observer
 class Content extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
-    componentDidMount=()=>{
+    componentDidMount = () => {
         store.getAllEssay();
     }
 
     render() {
         return (
-            <div style={{ height: 1000, position: "relative", top: 70 }}>
-                <Container maxWidth="md">
-                    {store.essayList.map((essay)=>{
-                        return <EssayCard essay={essay} />
-                    })}
-                </Container>
+            <div style={{ position: "relative", top: 70 }}>
+                <Grid container xs={12}>
+                    <Grid item xs={1}>
+
+                    </Grid>
+                    <Grid xs={8}>
+                        <Container maxWidth="md">
+                            {store.essayList.map((essay) => {
+                                return <EssayCard essay={essay} />
+                            })}
+                        </Container>
+                    </Grid>
+                    <Grid item xs={2}>
+
+                    </Grid>
+                </Grid>
+
             </div>
         );
     }

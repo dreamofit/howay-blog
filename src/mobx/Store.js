@@ -1,4 +1,4 @@
-import {action, observable, observe} from 'mobx';
+import {action, observable} from 'mobx';
 import { tool } from '../apis/API';
 import {getAllEssay} from '../utils/Urls'
 
