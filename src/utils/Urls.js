@@ -1,6 +1,8 @@
-const ip = "https://howay.utools.club";
+const ip = "http://localhost:8081";
 const getAllEssay = ip+"/essay/all";
+const login = ip+"/user/login";
 
 export{
-    getAllEssay
+    getAllEssay,
+    login
 }

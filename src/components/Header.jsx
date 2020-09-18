@@ -35,8 +35,9 @@ class Header extends Component {
         super(props);
     }
 
-    change=()=>{
-        store.change();
+    openLogin=()=>{
+        //store.change();
+        window.open("http://localhost:3000/login");
     }
 
     linkTo=(url)=>{
@@ -62,8 +63,8 @@ class Header extends Component {
                     </Grid>
                     <Grid item xs={1}>
                         {
-                            status?<Button onClick={this.change} color="inherit">Login</Button>:
-                            <div onClick={this.change} style={style.avatar}><Avatar>H</Avatar></div>
+                            status==false?<Button onClick={this.openLogin} color="inherit">Login</Button>:
+                            <div onClick style={style.avatar}><Avatar>H</Avatar></div>
                         }
                         
                     </Grid>
