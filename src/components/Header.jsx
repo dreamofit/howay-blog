@@ -63,7 +63,7 @@ class Header extends Component {
                     </Grid>
                     <Grid item xs={1}>
                         {
-                            status==false?<Button onClick={this.openLogin} color="inherit">Login</Button>:
+                            status===false?<Button onClick={this.openLogin} color="inherit">Login</Button>:
                             <div onClick style={style.avatar}><Avatar>H</Avatar></div>
                         }
                         

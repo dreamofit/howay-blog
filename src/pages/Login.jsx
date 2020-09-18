@@ -1,4 +1,5 @@
 import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Link, TextField, Typography, withStyles, makeStyles } from '@material-ui/core';
+import { observer } from 'mobx-react';
 import React, { Component } from 'react';
 import { Store } from '../mobx/Store';
 const store = new Store();
@@ -16,8 +17,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        margin: 80,
-
+        margin: 80
     },
     form: {
         width: '100%',
@@ -26,9 +26,10 @@ const styles = {
     submit: {
         marginTop: 20,
         marginBottom: 20,
-    },
+    }
 }
 
+@observer
 class Login extends Component {
     constructor(props){
         super(props);
@@ -53,13 +54,25 @@ class Login extends Component {
 
     render() {
         const { classes } = this.props;
-        const {name,password} = this.state
+        const {name,password} = this.state;
+        const {userName,userId} = store;
+        let helperText = "";
+        let error = false;
+        if(userId===-10){
+            error = true;
+            helperText="密码或用户名错误！";
+        }else if(userId===-100){
+            error = true;
+            helperText="网络错误或服务器出现问题，请稍后再试！";
+        }else if(userId>0){
+
+        }
         return (
             <div>
                 
                 <Grid container component="main" className={classes.root}>
                     <Grid item xs={false} sm={4} md={7} className={classes.image} />
-                    <Grid item xs={12} sm={8} md={5} elevation={6} square>
+                    <Grid item xs={12} sm={8} md={5} elevation={6} >
                         <div className={classes.paper}>
                             <Typography component="h1" variant="h5">登录</Typography>
                             <TextField
@@ -80,8 +93,8 @@ class Login extends Component {
                                 defaultValue={null}
                                 required
                                 fullWidth
-                                error={false}
-                                helperText=""
+                                error={error}
+                                helperText={helperText}
                                 value={password}
                                 placeholder="password"
                                 type="password"
@@ -101,9 +114,7 @@ class Login extends Component {
                                     <Link href="#" variant="body2">忘记密码？</Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"没有账号？去注册"}
-                                    </Link>
+                                    <Link href="#" variant="body2">{"没有账号？去注册"}</Link>
                                 </Grid>
                             </Grid>
                         </div>
