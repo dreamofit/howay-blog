@@ -1,8 +1,8 @@
 import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Link, TextField, Typography, withStyles, makeStyles } from '@material-ui/core';
-import { observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
-import { Store } from '../mobx/Store';
-const store = new Store();
+import baseStore from '../mobx';
+const store = baseStore;
 const styles = {
     root: {
         height: '100vh',
@@ -65,7 +65,7 @@ class Login extends Component {
             error = true;
             helperText="网络错误或服务器出现问题，请稍后再试！";
         }else if(userId>0){
-
+            window.close();
         }
         return (
             <div>

@@ -34,6 +34,7 @@ export class Store {
                 this.userId = cookieMap.get("cl_id");
                 this.status = true;
                 console.log(this.status);
+                window.location.href="http://localhost:3000/"
             }else{
                 this.status = false;
                 this.userId = -10;//输入用户名和密码不匹配

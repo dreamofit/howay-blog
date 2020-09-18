@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
-import { Store } from '../mobx/Store';
+import baseStore from '../mobx';
 import { observer } from 'mobx-react';
 import EssayCard from './EssayCard';
-const store = new Store();
+const store = baseStore;
 
 const styles = {
     container: {

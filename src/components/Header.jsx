@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, Typography, Button, Avatar } from '@material-ui/core';
-import { Store } from '../mobx/Store';
-import { observer } from 'mobx-react'
+import {baseStore} from '../mobx';
+import { inject, observer } from 'mobx-react'
 
-const store = new Store();
+const store = baseStore;
 const style = {
     main: {
         width: "100%",
@@ -28,6 +28,7 @@ const style = {
     }
 }
 
+@inject('baseStore')
 @observer
 class Header extends Component {
     
