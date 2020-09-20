@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Typography, Button, Avatar } from '@material-ui/core';
-import {baseStore} from '../mobx';
-import { inject, observer } from 'mobx-react'
 
-const store = baseStore;
 const style = {
     main: {
         width: "100%",
@@ -28,8 +25,6 @@ const style = {
     }
 }
 
-@inject('baseStore')
-@observer
 class Header extends Component {
     
     constructor(props){
@@ -38,7 +33,7 @@ class Header extends Component {
 
     openLogin=()=>{
         //store.change();
-        window.open("http://localhost:3000/login");
+        window.location.href = "http://localhost:3000/login";
     }
 
     linkTo=(url)=>{
@@ -50,7 +45,7 @@ class Header extends Component {
     }
 
     render() {
-        let status = store.status;
+        const status = false;
         return (
             <div style={style.main}>
                 <Grid container >

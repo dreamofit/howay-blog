@@ -1,9 +1,13 @@
+import { observer } from 'mobx-react';
 import React, { Component } from 'react';
 import {BrowserRouter,Route} from 'react-router-dom'
 import Main from '../pages';
 import Blogs from '../pages/Blogs';
 import Login from '../pages/Login';
-class MyRouter extends Component {
+@observer class MyRouter extends Component {
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
             <BrowserRouter>

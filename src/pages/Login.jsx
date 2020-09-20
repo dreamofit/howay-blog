@@ -1,8 +1,6 @@
 import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Link, TextField, Typography, withStyles, makeStyles } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
-import baseStore from '../mobx';
-const store = baseStore;
 const styles = {
     root: {
         height: '100vh',
@@ -29,6 +27,7 @@ const styles = {
     }
 }
 
+@inject("baseStore")
 @observer
 class Login extends Component {
     constructor(props){
@@ -48,14 +47,14 @@ class Login extends Component {
     }
 
     login = ()=>{
-        store.login(this.state.name,this.state.password);
+        this.props.baseStore.login(this.state.name,this.state.password);
     }
         
 
     render() {
         const { classes } = this.props;
         const {name,password} = this.state;
-        const {userName,userId} = store;
+        const {userName,userId} = this.props.baseStore;
         let helperText = "";
         let error = false;
         if(userId===-10){
@@ -65,7 +64,7 @@ class Login extends Component {
             error = true;
             helperText="网络错误或服务器出现问题，请稍后再试！";
         }else if(userId>0){
-            window.close();
+            
         }
         return (
             <div>

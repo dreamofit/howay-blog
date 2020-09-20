@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
-import baseStore from '../mobx';
-import { observer } from 'mobx-react';
+import { observer,inject } from 'mobx-react';
 import EssayCard from './EssayCard';
-const store = baseStore;
 
 const styles = {
     container: {
@@ -12,13 +10,14 @@ const styles = {
     }
 }
 
+@inject("baseStore")
 @observer
 class Content extends Component {
     constructor(props) {
         super(props);
     }
     componentDidMount = () => {
-        store.getAllEssay();
+        this.props.baseStore.getAllEssay();
     }
 
     render() {
@@ -30,7 +29,7 @@ class Content extends Component {
                     </Grid>
                     <Grid xs={8}>
                         <Container maxWidth="md">
-                            {store.essayList.map((essay) => {
+                            {this.props.baseStore.essayList.map((essay) => {
                                 return <EssayCard essay={essay} />
                             })}
                         </Container>

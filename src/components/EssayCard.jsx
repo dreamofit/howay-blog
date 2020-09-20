@@ -19,7 +19,7 @@ const style = {
     },
     content: {
         fontSize: 14,
-        color: "rgba(0,0,0,0.6)",
+        color: "rgba(0,0,0,0.6)"
     },
     time: {
         fontSize: 10,
@@ -34,7 +34,7 @@ const style = {
     },
     purple: {
         backgroundColor: deepPurple[500],
-    },
+    }
 }
 /* 文章卡片 */
 class EssayCard extends Component {
@@ -51,7 +51,6 @@ class EssayCard extends Component {
         if (str.length > 80) {
             str = str.substring(0, 80) + "...";
         }
-        console.log("str:" + str);
         return str;
     }
 

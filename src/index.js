@@ -1,10 +1,12 @@
+import { Provider } from 'mobx-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MyRouter from './router/MyRouter';
+import baseStore from './mobx'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider baseStore={baseStore}>
     <MyRouter />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
