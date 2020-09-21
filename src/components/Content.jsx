@@ -30,7 +30,7 @@ class Content extends Component {
                     <Grid xs={8}>
                         <Container maxWidth="md">
                             {this.props.baseStore.essayList.map((essay) => {
-                                return <EssayCard essay={essay} />
+                                return <EssayCard {...this.props} essay={essay} />
                             })}
                         </Container>
                     </Grid>

@@ -1,6 +1,6 @@
 import { action, computed, observable } from 'mobx';
 import { tool, loginAPI } from '../apis/API';
-import { getAllEssay, login,register } from '../utils/Urls'
+import { getAllEssay, login,register,details } from '../utils/Urls'
 import { getCookie } from '../utils/GetCookieToMap'
 
 export class Store {
@@ -59,6 +59,12 @@ export class Store {
             "homePage":homePage
         };
         const res = await tool(register, data, {});
+        return res;
+    }
+
+    getEssayDetails = async (e_id) => {
+        let data = {e_id:e_id};
+        const res = await tool(details, data, {});
         return res;
     }
 

@@ -56,13 +56,14 @@ class Header extends Component {
     }
 
     first = (str) => {
+        if(str===undefined){
+            return;
+        }
         return str.substring(0, 1);
     }
 
     render() {
-        console.log(this.props.km);
         const {status,userName} = this.props.baseStore;
-        console.log("status:"+status);
         return (
             <div style={style.main}>
                 <Grid container >

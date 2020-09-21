@@ -8,5 +8,6 @@ const details = ip+"/essay/find";
 export{
     getAllEssay,
     login,
-    register
+    register,
+    details
 }

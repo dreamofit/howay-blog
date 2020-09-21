@@ -2,6 +2,7 @@ import { Avatar, Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import MyAvatar from './common/MyAvatar';
 
 const style = {
     card: {
@@ -73,7 +74,20 @@ class EssayCard extends Component {
     }
 
     first = (str) => {
+        if(str===undefined){
+            return;
+        }
         return str.substring(0, 1);
+    }
+
+    openEssay = () => {
+        let essay = this.props.essay;
+        let e_id = essay.e_id+"";
+        this.props.history.push({
+            pathname:"/details",
+            search:"e_id="+e_id,
+            state:{e_id:e_id}
+        });
     }
 
     render() {
@@ -81,23 +95,12 @@ class EssayCard extends Component {
         let { color, left, backgroud } = this.state;
         const { classes } = this.props;
         return (
-            <div style={{ ...style.card, backgroundColor: backgroud }} onMouseOver={this.colorChange} onMouseOut={this.colorChange}>
+            <div style={{ ...style.card, backgroundColor: backgroud }} 
+            onClick = {this.openEssay}
+            onMouseOver={this.colorChange} 
+            onMouseOut={this.colorChange}>
                 <Grid container xs={12}>
-                    <Grid item container xs={12}>
-                        <Grid item xs={1}>
-                            <div><Avatar className={classes.purple}>{this.first(essay.publisher_name)}</Avatar></div>
-                        </Grid>
-
-                        <Grid item xs={11}>
-                            <Grid item xs={12}>
-                                <div style={style.name}>{essay.publisher_name}</div>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <div style={style.time}>{essay.update_time}</div>
-                            </Grid>
-
-                        </Grid>
-                    </Grid>
+                    <MyAvatar name={essay.publisher_name} time={essay.update_time} xs={12} />
                     <Grid item xs={12}>
                         <div style={{ ...style.title, color: color, marginLeft: left }}>{essay.title}</div>
                     </Grid>
