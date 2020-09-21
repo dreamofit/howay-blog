@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Typography, Button, Avatar } from '@material-ui/core';
+import { inject, observer } from 'mobx-react';
 
 const style = {
     main: {
@@ -25,27 +26,43 @@ const style = {
     }
 }
 
+@inject("baseStore")
+@observer
 class Header extends Component {
     
     constructor(props){
         super(props);
+        this.state={
+
+        }
     }
 
+    
+
     openLogin=()=>{
-        //store.change();
-        window.location.href = "http://localhost:3000/login";
+        let urlPath = this.props.location.pathname;
+        this.props.history.push({
+            pathname:"/login",
+            state:urlPath
+        });
     }
 
     linkTo=(url)=>{
         if(url=='home'){
-            window.location.href = "http://localhost:3000/"
+            this.props.history.push("/");
         }else{
-            window.location.href = "http://localhost:3000/blogs"
+            this.props.history.push("/blogs");
         }
     }
 
+    first = (str) => {
+        return str.substring(0, 1);
+    }
+
     render() {
-        const status = false;
+        console.log(this.props.km);
+        const {status,userName} = this.props.baseStore;
+        console.log("status:"+status);
         return (
             <div style={style.main}>
                 <Grid container >
@@ -60,7 +77,7 @@ class Header extends Component {
                     <Grid item xs={1}>
                         {
                             status===false?<Button onClick={this.openLogin} color="inherit">Login</Button>:
-                            <div onClick style={style.avatar}><Avatar>H</Avatar></div>
+                            <div onClick style={style.avatar}><Avatar>{this.first(userName)}</Avatar></div>
                         }
                         
                     </Grid>

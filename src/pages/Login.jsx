@@ -54,7 +54,8 @@ class Login extends Component {
     render() {
         const { classes } = this.props;
         const {name,password} = this.state;
-        const {userName,userId} = this.props.baseStore;
+        const baseStore = this.props.baseStore;
+        const {userName,userId,status} = this.props.baseStore;
         let helperText = "";
         let error = false;
         if(userId===-10){
@@ -64,7 +65,8 @@ class Login extends Component {
             error = true;
             helperText="网络错误或服务器出现问题，请稍后再试！";
         }else if(userId>0){
-            
+            let path = this.props.location.state;
+            this.props.history.push(path);
         }
         return (
             <div>
@@ -81,7 +83,7 @@ class Login extends Component {
                                 fullWidth
                                 defaultValue={null}
                                 value={name}
-                                placeholder="name"
+                                placeholder="用户名"
                                 autoFocus
                                 id="howay-name"
                                 onChange={this.nameChange}
@@ -95,7 +97,7 @@ class Login extends Component {
                                 error={error}
                                 helperText={helperText}
                                 value={password}
-                                placeholder="password"
+                                placeholder="密码"
                                 type="password"
                                 id="howay-password"
                                 onChange={this.passwordChange}
@@ -113,7 +115,7 @@ class Login extends Component {
                                     <Link href="#" variant="body2">忘记密码？</Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">{"没有账号？去注册"}</Link>
+                                    <Link onClick={()=>{this.props.history.push("/register")}} href="" variant="body2">{"没有账号？去注册"}</Link>
                                 </Grid>
                             </Grid>
                         </div>

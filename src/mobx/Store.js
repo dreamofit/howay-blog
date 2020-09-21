@@ -1,7 +1,7 @@
 import { action, computed, observable } from 'mobx';
 import { tool, loginAPI } from '../apis/API';
-import { getAllEssay, login } from '../utils/Urls'
-import { getCookieToMap } from '../utils/GetCookieToMap'
+import { getAllEssay, login,register } from '../utils/Urls'
+import { getCookie } from '../utils/GetCookieToMap'
 
 export class Store {
     @observable status = false;
@@ -25,7 +25,6 @@ export class Store {
     @action
     getAllEssay = async () => {
         let data = {};
-        data = JSON.stringify(data);
         const res = await tool(getAllEssay, data, {});
         if (res == undefined) {
             return; //服务器问题/网络问题
@@ -38,11 +37,8 @@ export class Store {
         const res = await loginAPI(login, name, password);
         if (res != undefined) {
             if (res.RE_CODE === 0) {
-                let cookieMap = getCookieToMap();
-                console.log(cookieMap);
-                //this.userName = cookieMap.get("cl_name");
-                //this.userId = cookieMap.get("cl_id");
-                console.log(cookieMap.get("cl_id"));
+                this.userName = getCookie("cl_name");
+                this.userId = getCookie("cl_id");
                 this.status = true;
             } else {
                 this.status = false;
@@ -53,4 +49,17 @@ export class Store {
             this.userId = -100; //服务器问题/网络问题
         }
     }
+
+    @action
+    register = async (name,password,email,homePage) => {
+        let data = {
+            "name":name,
+            "password":password,
+            "email":email,
+            "homePage":homePage
+        };
+        const res = await tool(register, data, {});
+        return res;
+    }
+
 }

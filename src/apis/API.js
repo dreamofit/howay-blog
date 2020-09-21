@@ -1,7 +1,7 @@
 
 export function tool(url, data) {
     return fetch(url, {
-        body: data,
+        body: JSON.stringify(data),
         method: "POST",
         headers: {
             "content-type": "application/json",

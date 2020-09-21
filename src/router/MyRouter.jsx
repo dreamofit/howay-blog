@@ -4,6 +4,7 @@ import {BrowserRouter,Route} from 'react-router-dom'
 import Main from '../pages';
 import Blogs from '../pages/Blogs';
 import Login from '../pages/Login';
+import Register from '../pages/Register';
 @observer class MyRouter extends Component {
     constructor(props){
         super(props);
@@ -14,6 +15,7 @@ import Login from '../pages/Login';
                 <Route path="/" component={Main} exact/>
                 <Route path="/blogs" component={Blogs} />
                 <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
             </BrowserRouter>
         );
     }

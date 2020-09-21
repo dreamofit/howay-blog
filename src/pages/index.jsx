@@ -9,8 +9,8 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <Header />
-                <Content />
+                <Header {...this.props} />
+                <Content {...this.props} />
             </div>
         );
     }
