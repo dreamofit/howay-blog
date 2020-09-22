@@ -23,15 +23,24 @@ const style = {
 class MyAvatar extends Component {
 
     first = (str) => {
-        console.log("str:" + str)
         if (str === undefined) {
             return;
         }
         return str.substring(0, 1);
     }
 
+    getLevel = (level,rank) => {
+        if(rank==="FLOOR"||rank==="floor"){
+            return level+"楼";
+        }else if(rank==="LAYER"||rank==="layer"){
+            return level+"#";
+        }else{
+            return;
+        }
+    }
+
     render() {
-        const { name, time, classes,xs } = this.props;
+        const { name, time, classes,xs,level,rank } = this.props;
         return (
             <Grid container xs={xs}>
                 <Grid item xs={1}>
@@ -45,7 +54,9 @@ class MyAvatar extends Component {
                     <Grid item xs={12}>
                         <div style={style.time}>{time}</div>
                     </Grid>
-
+                </Grid>
+                <Grid item xs={1}>
+                    {this.getLevel(level,rank)}
                 </Grid>
             </Grid>
         );

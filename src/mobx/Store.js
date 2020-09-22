@@ -1,6 +1,6 @@
 import { action, computed, observable } from 'mobx';
 import { tool, loginAPI } from '../apis/API';
-import { getAllEssay, login,register,details } from '../utils/Urls'
+import { getAllEssay, login, register, details, writeFloor,writeLayer } from '../utils/Urls'
 import { getCookie } from '../utils/GetCookieToMap'
 
 export class Store {
@@ -9,10 +9,10 @@ export class Store {
     @observable userName = "";
     @observable userId = -1;
 
-    @computed get loginStatus(){
+    @computed get loginStatus() {
         return this.status;
     }
-    set loginStatus(status){
+    set loginStatus(status) {
         this.status = status;
     }
 
@@ -51,20 +51,47 @@ export class Store {
     }
 
     @action
-    register = async (name,password,email,homePage) => {
+    register = async (name, password, email, homePage) => {
         let data = {
-            "name":name,
-            "password":password,
-            "email":email,
-            "homePage":homePage
+            "name": name,
+            "password": password,
+            "email": email,
+            "homePage": homePage
         };
         const res = await tool(register, data, {});
         return res;
     }
 
+    @action
     getEssayDetails = async (e_id) => {
-        let data = {e_id:e_id};
+        let data = { e_id: e_id };
         const res = await tool(details, data, {});
+        return res;
+    }
+
+    @action
+    handleWriteFloor = async (e_id, content, u_id, level) => {
+        let data = {
+            "essay": e_id,
+            "content": content,
+            "publisher": u_id,
+            "level": level
+        };
+        const res = await tool(writeFloor, data, {});
+        return res;
+    }
+
+    @action
+    handleWriteLayer = async (f_id,content,publisher,responder,level,replied_lid) => {
+        let data = {
+            "floor": f_id, 
+            "content": content,
+            "publisher": publisher,
+            "responder": responder,
+            "level": level, 
+            "replied_lid": replied_lid 
+        };
+        const res = await tool(writeLayer, data, {});
         return res;
     }
 
