@@ -16,15 +16,16 @@ class ReplyButton extends Component {
     }
 
     write = () => {
-        const {rank,baseStore,level,essay_id,getEssayDetails,f_id,responder,replied_lid} = this.props;
+        const {rank,baseStore,level,e_id,getEssayDetails,f_id,responder,replied_lid} = this.props;
         const {content} = this.state;
-        console.log(content);
+        console.log(e_id);
         let u_id = getCookie("cl_id");
+        let info = {};
         if(u_id===undefined){
             return;
         }else{
             if(rank==="ESSAY"||rank==="essay"){
-                const res = baseStore.handleWriteFloor(essay_id,content,u_id,level);
+                const res = baseStore.handleWriteFloor(e_id,content,u_id,level,info);
                 res.then(r=>{
                     if(r.RE_CODE===0){
                         getEssayDetails();

@@ -10,7 +10,7 @@ class Blogs extends Component {
         return (
             <div>
                 <Header {...this.props} />
-                <Content {...this.props} />
+                <Content {...this.props} type={"ESSAY"} />
             </div>
         );
     }

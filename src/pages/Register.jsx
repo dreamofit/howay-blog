@@ -1,6 +1,7 @@
 import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Link, TextField, Typography, withStyles, makeStyles } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
+import md5 from 'md5';
 const styles = {
     root: {
         height: '100vh',
@@ -85,7 +86,7 @@ class Register extends Component {
         const {name,password,password1,email,homePage } = this.state;
         if(name!==""){
             if(password===password1){
-                let res = this.props.baseStore.register(name,password,email,homePage);
+                let res = this.props.baseStore.register(name,md5(password),email,homePage);
                 res.then(r=>{
                     if(r!==undefined){
                         if(r.RE_CODE===0){

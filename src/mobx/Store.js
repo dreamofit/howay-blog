@@ -23,8 +23,8 @@ export class Store {
     }
 
     @action
-    getAllEssay = async () => {
-        let data = {};
+    getAllEssay = async (type) => {
+        let data = {"type":type};
         const res = await tool(getAllEssay, data, {});
         if (res == undefined) {
             return; //服务器问题/网络问题
@@ -70,12 +70,14 @@ export class Store {
     }
 
     @action
-    handleWriteFloor = async (e_id, content, u_id, level) => {
+    handleWriteFloor = async (e_id, content, u_id, level,info) => {
+        console.log(e_id);
         let data = {
             "essay": e_id,
             "content": content,
             "publisher": u_id,
-            "level": level
+            "level": level,
+            "info":info
         };
         const res = await tool(writeFloor, data, {});
         return res;

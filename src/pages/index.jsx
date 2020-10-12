@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Content from './Content';
+import Content from '../components/Content';
 import Header from '../components/Header';
 
 class Main extends Component {
@@ -10,7 +10,7 @@ class Main extends Component {
         return (
             <div>
                 <Header {...this.props} />
-                <Content {...this.props} />
+                <Content {...this.props} type={"BLOG"} />
             </div>
         );
     }

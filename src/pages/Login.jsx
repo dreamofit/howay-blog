@@ -1,6 +1,7 @@
 import { Avatar, Box, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Link, TextField, Typography, withStyles, makeStyles } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
+import md5 from 'md5';
 const styles = {
     root: {
         height: '100vh',
@@ -43,7 +44,7 @@ class Login extends Component {
     }
 
     passwordChange=(e)=>{
-        this.setState({password:e.target.value})
+        this.setState({password:md5(e.target.value)})
     }
 
     login = ()=>{
@@ -96,7 +97,6 @@ class Login extends Component {
                                 fullWidth
                                 error={error}
                                 helperText={helperText}
-                                value={password}
                                 placeholder="密码"
                                 type="password"
                                 id="howay-password"

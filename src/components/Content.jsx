@@ -17,7 +17,7 @@ class Content extends Component {
         super(props);
     }
     componentDidMount = () => {
-        this.props.baseStore.getAllEssay();
+        this.props.baseStore.getAllEssay(this.props.type);
     }
 
     render() {
