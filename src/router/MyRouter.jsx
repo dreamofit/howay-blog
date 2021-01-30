@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {BrowserRouter,Route} from 'react-router-dom'
 import EssayDetails from '../components/EssayDetails';
 import Test from '../components/Test';
+import Write from '../components/Write';
 import Main from '../pages';
 import Blogs from '../pages/Blogs';
 import Login from '../pages/Login';
@@ -19,7 +20,7 @@ import Register from '../pages/Register';
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/details" component={EssayDetails} />
-                <Route path="/test" component={Test} />
+                <Route path="/write" component={Write} />
             </BrowserRouter>
         );
     }

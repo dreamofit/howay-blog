@@ -5,6 +5,7 @@ const register = ip+"/user/register";
 const details = ip+"/essay/find";
 const writeFloor = ip+"/floor/write";
 const writeLayer = ip+"/layer/write";
+const writePost = ip+"/essay/writePost";
 
 export{
     getAllEssay,
@@ -13,4 +14,5 @@ export{
     details,
     writeFloor,
     writeLayer,
+    writePost,
 }

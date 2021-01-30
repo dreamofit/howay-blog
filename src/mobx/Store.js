@@ -1,6 +1,6 @@
 import { action, computed, observable } from 'mobx';
 import { tool, loginAPI } from '../apis/API';
-import { getAllEssay, login, register, details, writeFloor,writeLayer } from '../utils/Urls'
+import { getAllEssay, login, register, details, writeFloor,writeLayer,writePost } from '../utils/Urls'
 import { getCookie } from '../utils/GetCookieToMap'
 
 export class Store {
@@ -20,6 +20,13 @@ export class Store {
     change = () => {
         this.status = !this.status;
         console.log("status:" + this.status);
+    }
+
+    @action
+    changeStatus = () => {
+        this.status = true;
+        this.userName = getCookie("cl_name");
+        this.userId = getCookie("cl_id");
     }
 
     @action
@@ -94,6 +101,21 @@ export class Store {
             "replied_lid": replied_lid 
         };
         const res = await tool(writeLayer, data, {});
+        return res;
+    }
+
+    @action
+    handleWritePost = async (title, content, u_id,label,type,info) => {
+        console.log(e_id);
+        let data = {
+            "title":title,
+            "content":content,
+            "publisher":u_id,   //这个是发布人，楼主id
+            "label":label,  //发表内容归类，标签
+            "type":type,  /* 文章类型，分为：BLOG/ESSAY/DIARY 其中BLOG为新闻、资讯、技术等分享类型文章，由系统管理员直接发布，原则上不允许用户进行发布；ESSAY为默认类型，属于圈子，由用户发布并永久属于PULIC类型的文章；DIARY为动态类型，由用户发布，可以自定义隐私：PUBLIC(公开)/PRIVATE(私密)/ONLYFANS(仅关注之人) */
+            "info":info //前端自定义json字段，自己定义自己解析
+        };
+        const res = await tool(writePost, data, {});
         return res;
     }
 

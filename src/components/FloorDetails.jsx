@@ -11,11 +11,11 @@ class LayerDetails extends Component {
                 <MyAvatar
                     name={layer.publisher_name}
                     time={layer.update_time}
-                    xs={6}
+                    xs={9}
                     level={layer.level}
                     rank={"layer"} />
-                <div>{layer.replied_lid === -1 ? layer.content : " 回复 " + layer.responder_name + ": " + layer.content}</div>
-                <ReplyButton xs={5} f_id={f_id} responder={layer.publisher} replied_lid={layer.l_id}
+                <div style={{marginLeft:10,marginTop:10}}>{layer.replied_lid === -1 ? layer.content : " 回复 " + layer.responder_name + ": " + layer.content}</div>
+                <ReplyButton xs={8} f_id={f_id} responder={layer.publisher} replied_lid={layer.l_id}
                 rank={"LAYER"} level={this.props.getMaxLevel()+1}  {...this.props} />
             </div>
         );
@@ -43,15 +43,15 @@ class FloorDetails extends Component {
     render() {
         const { floor } = this.props;
         return (
-            <div style={{ marginLeft: 80, marginTop: 20 }}>
+            <div style={{ marginLeft: 10, marginTop: 20 }}>
                 <MyAvatar
                     name={floor.publisher_name}
                     time={floor.update_time}
-                    xs={6}
+                    xs={11}
                     level={floor.level}
                     rank={"floor"} />
-                <div>{floor.content}</div>
-                <ReplyButton xs={5} f_id={floor.f_id} responder={floor.publisher}
+                <div style={{marginLeft:10,marginTop:10}}>{floor.content}</div>
+                <ReplyButton xs={10} f_id={floor.f_id} responder={floor.publisher}
                 rank={"FLOOR"} level={this.getMaxLevel()+1}  {...this.props} />
 
                 {floor.layer.map(layer => {

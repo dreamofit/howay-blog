@@ -5,6 +5,7 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import FloorDetails from './FloorDetails';
 import MyAvatar from './common/MyAvatar';
 import ReplyButton from './common/ReplyButton';
+import Header from './Header';
 
 const style = {
     purple: {
@@ -16,10 +17,10 @@ const style = {
 @inject("baseStore")
 @observer
 class EssayDetails extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            essay:{}
+            essay: {}
         }
     }
 
@@ -27,9 +28,9 @@ class EssayDetails extends Component {
         let e_id = this.props.location.state.e_id;
         let essay = this.state.essay;
         const res = this.props.baseStore.getEssayDetails(e_id);
-        res.then((r)=>{
-            if(r.RE_CODE===0){
-                this.setState({essay:r});
+        res.then((r) => {
+            if (r.RE_CODE === 0) {
+                this.setState({ essay: r });
                 console.log(r)
             }
         })
@@ -40,21 +41,21 @@ class EssayDetails extends Component {
     }
 
     first = (str) => {
-        console.log("str:"+str)
-        if(str===undefined){
+        console.log("str:" + str)
+        if (str === undefined) {
             return;
         }
         return str.substring(0, 1);
     }
 
     getMaxLevel = () => {
-        const {essay} = this.state;
+        const { essay } = this.state;
         let max = 0;
-        if(essay.floor===undefined){
+        if (essay.floor === undefined) {
             return;
-        }else{
-            for(let i=0;i<essay.floor.length;i++){
-                if(max<essay.floor[i].level){
+        } else {
+            for (let i = 0; i < essay.floor.length; i++) {
+                if (max < essay.floor[i].level) {
                     max = essay.floor[i].level;
                 }
             }
@@ -63,24 +64,38 @@ class EssayDetails extends Component {
     }
 
     render() {
-        const {essay} = this.state;
-        const {classes} = this.props;
+        const { essay } = this.state;
+        const { classes } = this.props;
         return (
             <div>
-                <div>{"["+essay.label+"] "+essay.title}</div>
-                <div style={{marginLeft:10}}>
-                    <MyAvatar name={essay.publisher_name} time={essay.update_time} xs={6} />
+                <Header {...this.props} />
+                <div style={{ position: "relative", top: 70 }}>
+                    <Grid container >
+                        <Grid xs={1}></Grid>
+                        <Grid xs={9}>
+                            <div style={{fontSize:20,fontWeight:800}}>{"[" + essay.label + "] " + essay.title}</div>
+                            <div style={{ marginLeft: 10,marginTop:10 }}>
+                                <MyAvatar name={essay.publisher_name} time={essay.update_time} xs={9} />
+                            </div>
+                            <div style={{marginLeft:20,marginTop:10}}>{essay.content}</div>
+                            <ReplyButton getEssayDetails={this.getEssayDetails} xs={11}
+                                rank="ESSAY" level={this.getMaxLevel() + 1} e_id={essay.e_id} {...this.props} />
+                            <span style={{cursor:"pointer",fontSize:10}}>按最热排序</span>
+                            <span style={{cursor:"pointer",marginLeft:20,fontSize:10}}>按最新排序</span>
+                            <span style={{cursor:"pointer",marginLeft:100,fontSize:10}}>倒序</span>
+                            {
+                                essay.floor === undefined ? null : essay.floor.map((floor) => {
+                                    return <FloorDetails floor={floor} getEssayDetails={this.getEssayDetails} />
+                                })
+                            }
+                        </Grid>
+                        <Grid xs={2}></Grid>
+                    </Grid>
+
+
                 </div>
-                <div>{essay.content}</div>
-                <ReplyButton getEssayDetails={this.getEssayDetails} xs={8}
-                rank="ESSAY" level={this.getMaxLevel()+1} e_id={essay.e_id} {...this.props} />
-                
-                {
-                    essay.floor===undefined?null:essay.floor.map((floor)=>{
-                        return <FloorDetails floor={floor} getEssayDetails={this.getEssayDetails} />
-                    })
-                }
-                
+
+
             </div>
         );
     }

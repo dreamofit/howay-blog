@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Typography, Button, Avatar } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
+import { getCookie } from '../utils/GetCookieToMap';
 
 const style = {
     main: {
@@ -37,7 +38,15 @@ class Header extends Component {
         }
     }
 
-    
+    componentDidMount=()=>{
+        const {changeStatus} = this.props.baseStore;
+        let u_id = getCookie("cl_id");
+        if(u_id===undefined){
+            return;
+        }else{
+            changeStatus();
+        }
+    }
 
     openLogin=()=>{
         let urlPath = this.props.location.pathname;
@@ -48,11 +57,7 @@ class Header extends Component {
     }
 
     linkTo=(url)=>{
-        if(url=='home'){
-            this.props.history.push("/");
-        }else{
-            this.props.history.push("/blogs");
-        }
+        this.props.history.push(url);
     }
 
     first = (str) => {
@@ -71,9 +76,9 @@ class Header extends Component {
                         <div style={style.label}>
                             <Typography variant="h6" >howay-blog</Typography>
                         </div>
-                            <Button onClick={this.linkTo.bind(this,"home")} color="inherit">首页</Button>
-                            <Button onClick={this.linkTo.bind(this,"blogs")} color="inherit">圈子</Button>
-
+                            <Button onClick={this.linkTo.bind(this,"/")} color="inherit">首页</Button>
+                            <Button onClick={this.linkTo.bind(this,"/blogs")} color="inherit">圈子</Button>
+                            <Button onClick={this.linkTo.bind(this,"/write")} color="inherit">创作中心</Button>
                     </Grid>
                     <Grid item xs={1}>
                         {
